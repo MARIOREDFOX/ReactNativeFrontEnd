@@ -1,50 +1,53 @@
-import React ,{ Component } from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  Image,
-  ImageBackground,
-} from 'react-native';
+import * as React from 'react';
+import { Button, View, Text } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-import bgImage from './assets/images/background.jpg'
-import logo from './assets/images/logo.png'
-
-class App extends Component {
-  render() {
-    return (
-      <ImageBackground source={bgImage} style={styles.backgroundContainer}>
-        <View style={styles.logoContainer}>
-          <Image source={logo} style={styles.logo}/>
-          <Text style={styles.logoText}>LOGIN</Text>
-        </View>
-      </ImageBackground>
-    )
-  }
+function HomeScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button
+        title="Go to Details"
+        onPress={() => navigation.navigate('Details')}
+      />
+    </View>
+  );
 }
 
-const styles = StyleSheet.create({
-  backgroundContainer: {
-    flex:1,
-    width:null,
-    height:null,
-    justifyContent:'center',
-    alignItems:'center',
-  },
-  logo: {
-    width: 120,
-    height: 120 
-  },
-  logoContainer: {
-    alignItems: 'center'
-  },
-  logoText: {
-    color:'white',
-    fontSize: 20,
-    fontWeight: '500',
-    marginTop: 10,
-    opacity: 0.5
-  }
-});
+function DetailsScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Details Screen</Text>
+      <Button
+        title="Go to Details... again"
+        onPress={() => navigation.push('Details')}
+      />
+      <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
+      <Button title="Go back" onPress={() => navigation.goBack()} />
+      <Button
+        title="Go back to first screen in stack"
+        onPress={() => navigation.popToTop()}
+      />
+    </View>
+  );
+}
+
+const Stack = createStackNavigator();
+
+function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{ title: 'Overview' }}
+        />
+        <Stack.Screen name="Details" component={DetailsScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
 
 export default App;
