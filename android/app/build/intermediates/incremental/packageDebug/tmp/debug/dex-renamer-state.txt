@@ -1,0 +1,4 @@
+#Thu Mar 19 16:04:04 IST 2020
+base.0=/home/marioredfox/Workspace/ReactNative/Project/Frontend/android/app/build/intermediates/transforms/dexMerger/debug/0
+path.0=classes.dex
+renamed.0=classes.dex
